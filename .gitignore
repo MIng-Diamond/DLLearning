@@ -1,0 +1,20 @@
+# 虚拟环境：本项目用 conda 环境 learndl（在 ~/miniforge3/envs/ 下，不在仓库里，无需忽略）
+# 下面这条是防御性保留，防止以后误建 venv
+.venv/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 数据集与模型权重：体积大，不要提交
+data/
+*.pt
+*.pth
+*.ckpt
+
+# 编辑器
+.vscode/
+.idea/
