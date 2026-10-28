@@ -1,7 +1,7 @@
 # 手写深度学习网络 · 学习路线
 
 > 目标：具备为**具身智能课题组**工作所需的网络实现能力
-> 标准（学长要求）：**PyTorch 手搭模型** —— 用 `nn.Parameter` + autograd，自己写 forward 和训练循环，不抄现成模型
+> 标准：**PyTorch 手搭模型** —— 用 `nn.Parameter` + autograd，自己写 forward 和训练循环，不抄现成模型
 > 起点：会基本 Python 语法，未接触过 NumPy
 
 ---
@@ -66,8 +66,6 @@ conda activate learndl         # 每次开始学习第一件事
 conda deactivate               # 退出
 ```
 
-**规矩**：`learndl` 是自己的沙箱，随便装随便折腾；**`embodied` 是学长配的和实验室对齐的，不要在里面随便装东西**。
-
 - 显卡：RTX 3060 Laptop，**5.7 GB 可用显存**（训大模型时 batch size 要调小）
 - VSCode 解释器选：`~/miniforge3/envs/learndl/bin/python`
 - torch 等到**阶段 1** 再装进 `learndl`
@@ -85,15 +83,32 @@ conda deactivate               # 退出
 | 2026-10-11 | **阶段 0 通关测试**（白纸默写：softmax + 线性回归训练循环） | ✅ 5/5 通过 |
 | 2026-10-17 | 第 05 课 手写 MLP（NumPy 版，拟合 sin(x)）—— 原为选修，已收尾 | ✅ 4/4 通过（梯度检验通过；loss 从 ~1 降至 ~3e-3，优于最优线性模型 5 倍以上） |
 | 2026-10-18 | 阶段 1 正式过关（MNIST ≥ 97%）—— 项目一已完成（Fashion-MNIST MLP 84.26%）；MNIST 补测暂缓，先进入阶段 2 | ⏸ 待补 |
+| 2026-10-25 | 第 11 课组件全部手写完成：位置编码 / 多头注意力 / FFN / 残差 Block / MiniGPT / 训练循环 / 自回归生成；`debug_components.py` 7/7 通过 | ✅ |
+| 2026-10-28 | 第 11 课完整训练跑通：2000 步 loss 从 4.0 降到 0.05，能生成 Alice 文本；进入第 12 课（Encoder-Decoder + 交叉注意力） | ✅ |
+| 2026-10-28 | **阶段 3 通关**：第 12 课 Encoder-Decoder + 交叉注意力 5/5 通过；序列反转在没见过的 256 条序列上 100% 全对 | ✅ |
 
 ### 阶段 2 · CNN（`02_cnn/`，先手写，再用 PyTorch 做项目）
 
 | 课 | 内容 | 状态 |
 |---|---|---|
-| 06 | **手写 2D 卷积 + 多通道 + 最大池化**，与 PyTorch 逐位对照 | 🔄 进行中 |
-| 07 | 手写 CNN 前向（用自己写的层拼出完整网络） | ⬜ |
-| 08 | 手写卷积/池化的反向传播 + 梯度检验 | ⬜ |
-| → | 用 PyTorch CNN 做 Fashion-MNIST 项目验证（`02_fashion_mnist/cnn.py`） | ⬜ |
+| 06 | 手写 2D 卷积 + 多通道 + 最大池化，与 PyTorch 逐位对照 | ✅ 4/4 |
+| 07 | 手写卷积/池化反向传播 | ⏭️ 跳过（用户选择直接学 PyTorch 实战） |
+| → | PyTorch CNN 做 Fashion-MNIST | ✅ 基础版 90.24% / 升级版 92.25% |
+| → | CNN 可视化（卷积核 / 特征图 / 置信度 / 混淆矩阵 / 错例） | ✅ |
+
+### 阶段 3 · 序列与注意力 ✅ 已通关
+
+| 课 | 目录 | 内容 | 状态 |
+|---|---|---|---|
+| 08 | `03_rnn_attention/` | RNN 原理 + 手写 cell 前向 + LSTM 正弦波预测 | ✅ 2/2 |
+| 09 | `03_rnn_attention/` | 梯度消失实验：RNN / GRU / LSTM(bias=1) 对比 | ✅ 2/2 |
+| 10 | `03_rnn_attention/` | 缩放点积注意力 + 多头注意力（手写，对照 PyTorch） | ✅ 2/2 |
+| 11 | `04_transformer/` | **Transformer Block + Mini-GPT**（位置编码 / 残差 / LayerNorm / FFN / 生成） | ✅ 完整训练完成（loss 4.0 → 0.05） |
+| 12 | `04_transformer/` | **Encoder-Decoder + 交叉注意力**（序列反转，阶段 3 过关任务） | ✅ 5/5（泛化 100%） |
+
+**阶段 3 过关任务 = 第 12 课**：序列反转（Encoder-Decoder Transformer）—— ✅ 已完成，没见过的 256 条序列整句全对 100%。
+
+**目录划分原则**：`03_rnn_attention` = 序列建模（RNN → LSTM → Attention，Attention 在这里是"解决 RNN 长程依赖"的方案）；`04_transformer` = 把 Attention 组装成完整架构。
 
 ### 项目一 · Fashion-MNIST 分类器（PyTorch 手搭）
 

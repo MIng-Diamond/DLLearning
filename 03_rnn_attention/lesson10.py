@@ -88,13 +88,14 @@ def scaled_dot_product_attention(q, k, v, mask=None):
         5. return attn @ v, attn
     """
     # TODO ①
-    B, _, D = q.shape
-    scores = torch.bmm(q, k.permute(0, 2, 1))
+    B = q.shape[0]
+    D = q.shape[-1]
+    scores = q @ k.transpose(-1, -2)
     scores = scores / math.sqrt(D)
     if mask is not None:
         scores = scores.masked_fill(mask == 0, float("-inf"))
     attn = torch.softmax(scores, dim = -1)
-    out = torch.bmm(attn, v)
+    out = attn @ v
     return (out, attn)
     raise NotImplementedError("还没写 scaled_dot_product_attention")
 
@@ -133,6 +134,20 @@ def multi_head_attention(q, k, v, W_q, W_k, W_v, W_o, n_heads):
         6. 返回 (out, attn_avg)，attn_avg 是各头权重的平均 (B, Tq, Tk)
     """
     # TODO ②
+    q = W_q(q)
+    k = W_k(k)
+    v = W_v(v)
+    B, Tq, D = q.shape
+    Tk = k.shape[1]
+    Tv = v.shape[1]
+    hd = D // n_heads
+    q = q.reshape(B, Tq, n_heads, hd).transpose(1, 2)
+    k = k.reshape(B, Tk, n_heads, hd).transpose(1, 2)
+    v = v.reshape(B, Tv, n_heads, hd).transpose(1, 2)
+    out, attn = scaled_dot_product_attention(q, k, v)
+    out = W_o(out.transpose(1, 2).reshape(B, Tq, D))
+    attn_avg = attn.mean(dim = 1)
+    return (out, attn_avg)
     raise NotImplementedError("还没写 multi_head_attention")
 
 
