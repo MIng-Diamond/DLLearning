@@ -82,10 +82,13 @@ conda deactivate               # 退出
 | 2026-10-11 | 第 04 课 PyTorch 对照（autograd、zero_grad、GPU） | ✅ 3/3 通过 |
 | 2026-10-11 | **阶段 0 通关测试**（白纸默写：softmax + 线性回归训练循环） | ✅ 5/5 通过 |
 | 2026-10-17 | 第 05 课 手写 MLP（NumPy 版，拟合 sin(x)）—— 原为选修，已收尾 | ✅ 4/4 通过（梯度检验通过；loss 从 ~1 降至 ~3e-3，优于最优线性模型 5 倍以上） |
-| 2026-10-18 | 阶段 1 正式过关（MNIST ≥ 97%）—— 项目一已完成（Fashion-MNIST MLP 84.26%）；MNIST 补测暂缓，先进入阶段 2 | ⏸ 待补 |
+| 2026-10-18 | 阶段 1 正式过关（MNIST ≥ 97%）—— 项目一已完成（Fashion-MNIST MLP 86.88%）；MNIST 补测暂缓，先进入阶段 2 | ⏸ 待补 |
 | 2026-10-25 | 第 11 课组件全部手写完成：位置编码 / 多头注意力 / FFN / 残差 Block / MiniGPT / 训练循环 / 自回归生成；`debug_components.py` 7/7 通过 | ✅ |
 | 2026-10-28 | 第 11 课完整训练跑通：2000 步 loss 从 4.0 降到 0.05，能生成 Alice 文本；进入第 12 课（Encoder-Decoder + 交叉注意力） | ✅ |
 | 2026-10-28 | **阶段 3 通关**：第 12 课 Encoder-Decoder + 交叉注意力 5/5 通过；序列反转在没见过的 256 条序列上 100% 全对 | ✅ |
+| 2026-10-28 | 第 13 课完成：tiny Shakespeare（111 万字符）训练 4.77M 字符级 Mini-GPT，6000 步；train 1.04 / val 1.64 / perplexity 5.13 | ✅ |
+| 2026-10-28 | 交互 demo 完成：`demo/demo_text.py`（Mini-GPT 生成）+ `demo/demo_image.py`（Fashion-MNIST top-3） | ✅ |
+| 2026-10-28 | 阶段报告完成：中文版 `report/report.md` / `.tex` / `.pdf`，英文版 `report/report_en.md` / `.tex` / `.pdf`（各 14 页，11 张实验图） | ✅ |
 
 ### 阶段 2 · CNN（`02_cnn/`，先手写，再用 PyTorch 做项目）
 
@@ -105,6 +108,7 @@ conda deactivate               # 退出
 | 10 | `03_rnn_attention/` | 缩放点积注意力 + 多头注意力（手写，对照 PyTorch） | ✅ 2/2 |
 | 11 | `04_transformer/` | **Transformer Block + Mini-GPT**（位置编码 / 残差 / LayerNorm / FFN / 生成） | ✅ 完整训练完成（loss 4.0 → 0.05） |
 | 12 | `04_transformer/` | **Encoder-Decoder + 交叉注意力**（序列反转，阶段 3 过关任务） | ✅ 5/5（泛化 100%） |
+| 13 | `04_transformer/` | **真实语料训练 Mini-GPT**（tiny Shakespeare，4.77M 参数） | ✅ train 1.04 / val 1.64 / ppl 5.13 |
 
 **阶段 3 过关任务 = 第 12 课**：序列反转（Encoder-Decoder Transformer）—— ✅ 已完成，没见过的 256 条序列整句全对 100%。
 
@@ -118,8 +122,8 @@ conda deactivate               # 退出
 |---|---|---|
 | 2026-10-17 | 第 1 节 数据管线 + 手搭 `nn.Module` | ✅ check1 2/2 |
 | 2026-10-18 | 第 2 节 训练循环 + 评估（交叉熵 / 优化器 / 准确率） | ✅ check2 2/2（3 轮 test_acc=0.842） |
-| 2026-10-18 | 第 3 节 评估与可视化（混淆矩阵 / 每类准确率 / 错例 / 正确样本） | ✅ check3 PASS（总体 84.26%） |
-| | **项目一当前成绩** | **test_acc = 84.26%（MLP，203,530 参数，5 轮）** |
+| 2026-10-18 | 第 3 节 评估与可视化（混淆矩阵 / 每类准确率 / 错例 / 正确样本） | ✅ check3 PASS（总体 86.88%） |
+| | **项目一当前成绩** | **test_acc = 86.88%（MLP，203,530 参数，20 轮）** |
 | 2026-10-18 | 尝试增加训练轮数（20 epochs）提升 MLP —— 判断提升有限，决定转入 CNN | ⏭️ 跳过 |
 
 ### 项目二 · CNN / ResNet（PyTorch 手搭）

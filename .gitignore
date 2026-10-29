@@ -18,3 +18,9 @@ data/
 # 编辑器
 .vscode/
 .idea/
+
+# 报告：只提交两份 Markdown 源文件
+# 生成的 PDF / LaTeX / HTML / 构建脚本 / 图片都不入库
+report/*
+!report/report.md
+!report/report_en.md
